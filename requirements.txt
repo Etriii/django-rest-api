@@ -3,3 +3,4 @@ djangorestframework
 dotenv
 mysqlclient
 djangorestframework-simplejwt
+watchdog

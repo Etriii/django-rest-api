@@ -2,11 +2,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
-from .models import CustomUser, GroupProfile
+from .models import User, GroupProfile
 
 # Custom User admin
-@admin.register(CustomUser)
-class CustomUserAdmin(UserAdmin):
+@admin.register(User)
+class UserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
         ("Institute Info", {"fields": ("institute_id",)}),
     )

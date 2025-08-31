@@ -6,6 +6,23 @@ from core.BaseModel import BaseModel
 from django.db import models
 from django.utils import timezone
 
+    
+class User(AbstractUser, BaseModel):
+    class UserStatus(models.TextChoices):
+        ACTIVE = "active", "Active"
+        INACTIVE = "inactive", "Inactive"
+        SUSPENDED = "suspended", "Suspended"
+    status = models.CharField(max_length=20, choices=UserStatus.choices, default=UserStatus.ACTIVE)
+    institute_id = models.CharField(max_length=100, null=True, blank=True)
+    
+    
+class GroupProfile(BaseModel):
+    group = models.OneToOneField(Group, on_delete=models.CASCADE, related_name="profile")
+    system_id = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.group.name} ({self.system_id})"
+
 
 class School(BaseModel):
     school_name = models.CharField(max_length=100, unique=True)
@@ -28,21 +45,7 @@ class System(BaseModel):
         return self.name
 
 
-class UserStatus(models.TextChoices):
-    ACTIVE = "active", "Active"
-    INACTIVE = "inactive", "Inactive"
-    SUSPENDED = "suspended", "Suspended"
-    
-class CustomUser(AbstractUser, BaseModel):
-    institute_id = models.CharField(max_length=100, null=True, blank=True)
-    
-    
-class GroupProfile(BaseModel):
-    group = models.OneToOneField(Group, on_delete=models.CASCADE, related_name="profile")
-    system_id = models.CharField(max_length=100, null=True, blank=True)
 
-    def __str__(self):
-        return f"{self.group.name} ({self.system_id})"
     
 """
 USAGE EXAMPLE
