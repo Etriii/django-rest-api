@@ -16,11 +16,10 @@ class School(BaseModel):
 class Institute(BaseModel):
     institute_name = models.CharField(max_length=255, unique=True)
     logo = models.TextField(max_length=1200)
-    school_id = models.CharField(20, unique=True)
+    school_id = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
         return self.institute_name
-
 
 class System(BaseModel):
     name = models.CharField(max_length=255, unique=True)
@@ -36,7 +35,6 @@ class UserStatus(models.TextChoices):
     
 class CustomUser(AbstractUser, BaseModel):
     institute_id = models.CharField(max_length=100, null=True, blank=True)
-    
     
     
 class GroupProfile(BaseModel):
