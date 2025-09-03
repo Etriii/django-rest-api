@@ -4,7 +4,7 @@ from utils.token_extractor import get_user_from_token
 
 class AuthViewSet(viewsets.ViewSet):
     def list(self, request):
-        user, exp = get_user_from_token(request)
+        user, exp, groups, permissions = get_user_from_token(request)
         
         if not user:
             return Response({"error": "Invalid or missing token"}, status=401)
@@ -13,5 +13,7 @@ class AuthViewSet(viewsets.ViewSet):
             "username": user.username,
             "email": user.email,
             "id": user.id,
-            "exp": exp 
+            "exp": exp,
+            "groups": groups,
+            "permissions": permissions
         })
