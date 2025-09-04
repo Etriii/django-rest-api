@@ -1,4 +1,3 @@
-# accounts/admin.py
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
@@ -8,14 +7,14 @@ from .models import User #GroupProfile
 @admin.register(User)
 class UserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
-        ("Institute Info", {"fields": ("institute_id",)}),
+        ("Institute Info", {"fields": ("institute",)}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        ("Institute Info", {"fields": ("institute_id",)}),
+        ("Institute Info", {"fields": ("institute",)}),
     )
 
-    list_display = ("username", "email", "institute_id", "is_staff", "is_active")
-    search_fields = ("username", "email", "institute_id")
+    list_display = ("username", "email", "institute", "is_staff", "is_active")
+    search_fields = ("username", "email", "institute")
 
 # # Group admin with profile inline
 # class GroupProfileInline(admin.StackedInline):

@@ -12,9 +12,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
 
         # Add custom claims
-        token["username"] = user.username
-        token["permissions"] = list(user.get_all_permissions())
+        # token["permissions"] = list(user.get_all_permissions())
         token["groups"] = list(user.groups.values_list("name", flat=True))
+        print(token["groups"])
 
         return token
     

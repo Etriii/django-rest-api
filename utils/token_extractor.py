@@ -20,11 +20,11 @@ def get_user_from_token(request):
         
         exp = validated_token.payload.get("exp")
         groups = validated_token.payload.get("groups")
-        permissions = validated_token.payload.get("permissions")
+        # permissions = validated_token.payload.get("permissions")
         
         jwt_auth = JWTAuthentication()
         user, _ = jwt_auth.get_user(validated_token), validated_token
         
-        return user, exp, groups, permissions
+        return user, exp , groups, #,permissions
     except (IndexError, InvalidToken, TokenError):
         return None, None
