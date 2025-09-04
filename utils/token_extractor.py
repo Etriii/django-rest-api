@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 def get_user_from_token(request):
     """
     Extracts the user and expiration from the JWT token in the Authorization header.
@@ -16,15 +17,16 @@ def get_user_from_token(request):
 
     try:
         token = auth_header.split()[1]
-        validated_token = UntypedToken(token)  
+        validated_token = UntypedToken(token)
         
+
         exp = validated_token.payload.get("exp")
         groups = validated_token.payload.get("groups")
         # permissions = validated_token.payload.get("permissions")
         
         jwt_auth = JWTAuthentication()
         user, _ = jwt_auth.get_user(validated_token), validated_token
-        
-        return user, exp , groups, #,permissions
+
+        return user, exp, groups  # ,permissions
     except (IndexError, InvalidToken, TokenError):
         return None, None

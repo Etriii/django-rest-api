@@ -1,25 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import  TokenRefreshView
 
 from api.views.AuthViewSet import AuthViewSet
+from api.serializer.AuthSerializer import CustomTokenObtainPairView
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        # Add custom claims
-        # token["permissions"] = list(user.get_all_permissions())
-        token["groups"] = list(user.groups.values_list("name", flat=True))
-        print(token["groups"])
-
-        return token
     
-class CustomTokenObtainPairView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
 
 router = DefaultRouter()
 router.register(f'profile', AuthViewSet, basename='profile')

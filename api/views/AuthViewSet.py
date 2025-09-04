@@ -14,6 +14,6 @@ class AuthViewSet(viewsets.ViewSet):
             "email": user.email,
             "id": user.id,
             "exp": exp,
-            "groups": groups,
+            "groups": groups
             # "permissions": permissions
         })
