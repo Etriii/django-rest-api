@@ -4,3 +4,5 @@ dotenv
 mysqlclient
 djangorestframework-simplejwt
 watchdog
+drf-spectacular 
+drf-spectacular[sidecar]
