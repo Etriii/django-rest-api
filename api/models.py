@@ -1,7 +1,52 @@
 from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django.conf import settings
-from core.BaseModel import BaseModel
+from .core.BaseModel import BaseModel
+
+class School(BaseModel):
+    school_name = models.CharField(max_length=100, unique=True)
+    logo = models.TextField(max_length=1200)
+    location = models.TextField(max_length=1200)
+
+    class Meta:
+        db_table = "schools"
+
+    def __str__(self):
+        return self.school_name
+
+
+class Institute(BaseModel):
+    institute_name = models.CharField(max_length=255, unique=True)
+    logo = models.TextField(max_length=1200)
+    school = models.ForeignKey(  # ✅ replaced `school_id = CharField`
+        "School", on_delete=models.CASCADE, related_name="institutes"
+    )
+    
+    class Meta:
+        db_table = "institutes"
+
+    def __str__(self):
+        return self.institute_name
+
+
+class Program(BaseModel):
+    class ProgramStatus(models.TextChoices):
+        ACTIVE = "active", "Active"
+        INACTIVE = "inactive", "Inactive"
+
+    name = models.CharField(max_length=100)
+    status = models.CharField(
+        max_length=20, choices=ProgramStatus.choices, default=ProgramStatus.ACTIVE
+    )
+    institute = models.ForeignKey(  # ✅ proper FK
+        "Institute", on_delete=models.CASCADE, related_name="programs"
+    )
+    
+    class Meta:
+        db_table = "programs"
+
+    def __str__(self):
+        return self.name
 
 
 class User(AbstractUser, BaseModel):
@@ -20,10 +65,22 @@ class User(AbstractUser, BaseModel):
         blank=True,
         related_name="users",
     )
+    
+    class Meta:
+        db_table = "users"
 
     def __str__(self):
         return self.username
 
+
+class System(BaseModel):
+    name = models.CharField(max_length=255, unique=True)
+    
+    class Meta:
+        db_table = "systems"
+
+    def __str__(self):
+        return self.name
 
 class UserSystems(BaseModel):  # ✅ typo fixed: "UserSytems" → "UserSystems"
     user = models.ForeignKey(  # ✅ dropped `_id` suffix
@@ -32,53 +89,12 @@ class UserSystems(BaseModel):  # ✅ typo fixed: "UserSytems" → "UserSystems"
     system = models.ForeignKey(
         "System", on_delete=models.CASCADE, related_name="system_users"
     )
+    
+    class Meta:
+        db_table = "user_systems"
 
     def __str__(self):
         return f"User: {self.user.username}, System: {self.system.name}"
-
-
-class School(BaseModel):
-    school_name = models.CharField(max_length=100, unique=True)
-    logo = models.TextField(max_length=1200)
-    location = models.TextField(max_length=1200)
-
-    def __str__(self):
-        return self.school_name
-
-
-class Institute(BaseModel):
-    institute_name = models.CharField(max_length=255, unique=True)
-    logo = models.TextField(max_length=1200)
-    school = models.ForeignKey(  # ✅ replaced `school_id = CharField`
-        "School", on_delete=models.CASCADE, related_name="institutes"
-    )
-
-    def __str__(self):
-        return self.institute_name
-
-
-class System(BaseModel):
-    name = models.CharField(max_length=255, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Program(BaseModel):
-    class ProgramStatus(models.TextChoices):
-        ACTIVE = "active", "Active"
-        INACTIVE = "inactive", "Inactive"
-
-    name = models.CharField(max_length=100)
-    status = models.CharField(
-        max_length=20, choices=ProgramStatus.choices, default=ProgramStatus.ACTIVE
-    )
-    institute = models.ForeignKey(  # ✅ proper FK
-        "Institute", on_delete=models.CASCADE, related_name="programs"
-    )
-
-    def __str__(self):
-        return self.name
 
 
 class Student(BaseModel):
@@ -104,6 +120,9 @@ class Student(BaseModel):
         max_length=20, choices=StudentStatus.choices, default=StudentStatus.ACTIVE
     )
     s_image = models.ImageField(upload_to="students/", null=True, blank=True)
+    
+    class Meta:
+        db_table = "students"
 
     def __str__(self):
         return f"{self.s_lname}, {self.s_fname} ({self.s_studentID})"  # ✅ fixed field names
@@ -119,9 +138,10 @@ class CollectionCategory(BaseModel):
 
     class Meta:
         db_table = "collection_categories"
-        ordering = ["category_name"]
-        unique_together = ("category_name", "institute")
-
+        # ordering = ["category_name"]
+        # unique_together = ("category_name", "institute")
+        pass
+    
     def __str__(self):
         return f"{self.category_name} ({self.collection_fee})"
 
@@ -164,6 +184,7 @@ class Fee(BaseModel):
     )
 
     class Meta:
+        db_table = "fees"
         indexes = [
             models.Index(fields=["student", "academic_year", "semester"]),
         ]
@@ -185,6 +206,9 @@ class AttendanceEvent(BaseModel):
     event_status = models.CharField(
         max_length=20, choices=EventStatus.choices, default=EventStatus.UPCOMING
     )
+    
+    class Meta:
+        db_table = "attendance_events"
 
     def __str__(self):
         return f"{self.event_name} ({self.get_event_status_display()})"
@@ -210,6 +234,9 @@ class AttendanceRecord(BaseModel):
         related_name="attendance_records",
     )
     date = models.DateField()
+    
+    class Meta:
+        db_table = "attendance_records"
 
     def __str__(self):
         return f"{self.student.s_studentID} - {self.date}"
@@ -247,7 +274,7 @@ class EventSetting(BaseModel):
     )
 
     class Meta:
-        # db_table = "event_settings"
+        db_table = "event_settings"
         # ordering = ["date"]
         # unique_together = ("attendance_event", "date")  # avoid duplicate settings for same event/date
         pass
@@ -292,7 +319,7 @@ class Payment(BaseModel):
     )
 
     class Meta:
-        # db_table = "payments"
+        db_table = "payments"
         # ordering = ["-created_at"]
         pass
 
@@ -340,7 +367,7 @@ class PaymentSubmission(BaseModel):
     remarks = models.TextField(null=True, blank=True)
 
     class Meta:
-        # db_table = "payment_submissions"
+        db_table = "payment_submissions"
         # ordering = ["-created_at"]
         pass
     
