@@ -6,7 +6,6 @@ class ApiConfig(AppConfig):
     name = 'api'
 
 
-# accounts/apps.py
 from django.apps import AppConfig
 
 class AccountsConfig(AppConfig):
