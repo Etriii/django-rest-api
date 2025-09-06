@@ -152,11 +152,11 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.AnonRateThrottle",
     ],
     "DEFAULT_THROTTLE_RATES": {
-        "user": "1000/day",
-        "anon": "20/min",
+        # naa puy built in sa throttler nga folder
+        "user": "100/hour",
+        "anon": "10/min",
     }
 }
-
 from datetime import timedelta
 
 SIMPLE_JWT = {

@@ -19,3 +19,5 @@ class CanDeleteSchool(BasePermission):
 
     def has_permission(self, request, view):
         return request.user.is_authenticated and request.user.is_superuser
+
+"Mag create nalang kog custom nga permission checker para ma dynamic :>"
