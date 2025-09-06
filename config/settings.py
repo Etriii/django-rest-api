@@ -180,4 +180,13 @@ SPECTACULAR_SETTINGS = {
     "LICENSE": {
         "name": "MIT",
     },
+    "ENUM_NAME_OVERRIDES": {
+        "api.models.User.status": "UserStatusEnum",
+        "api.models.Institute.status": "InstituteStatusEnum",
+        "api.models.Fee.status": "FeeStatusEnum",
+        "api.models.Payment.status": "PaymentStatusEnum",
+        "api.models.PaymentSubmission.status": "PaymentSubmissionStatusEnum",
+        "api.models.Program.status": "ProgramStatusEnum",
+    }
 }
+

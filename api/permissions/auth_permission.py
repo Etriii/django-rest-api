@@ -1,6 +1,5 @@
 from rest_framework.permissions import BasePermission
 
-
 class ScopedPermission(BasePermission):
     """
     Reusable permission for scoping by related fields.

@@ -13,7 +13,7 @@ class InstituteCreateSerializer(serializers.ModelSerializer):
 
 class InstituteReadSerializer(serializers.ModelSerializer):
     """Detailed schema for reading/retrieving"""
-
+    
     class Meta:
         model = Institute
         fields = [
@@ -25,6 +25,14 @@ class InstituteReadSerializer(serializers.ModelSerializer):
             "updated_at",
             "updated_by",
         ]
+        
+class InstituteReadSlimSerializer(serializers.ModelSerializer):
+    school_id = serializers.IntegerField(source="school.id", read_only=True)
+    school_name = serializers.CharField(source="school.school_name", read_only=True)
+    
+    class Meta:
+        model = Institute
+        fields = ["id", "institute_name", "school_id", "school_name"]
 
 
 class InstituteUpdateSerializer(serializers.ModelSerializer):

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from api.models import User
-from api.serializers.InstituteSerializers import InstituteReadSerializer
+from api.serializers.InstituteSerializers import InstituteReadSlimSerializer
 
 class UserCreateSerializer(serializers.ModelSerializer):
     """Schema for creating a user"""
@@ -15,9 +15,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
             "last_name",
             "status",
             "institute",
-            "is_superuser",
-            "is_staff",
-            "is_active",
         ]
         extra_kwargs = {
             "password": {"write_only": True},  
@@ -32,7 +29,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
 class UserReadSerializer(serializers.ModelSerializer):
     """Detailed schema for reading/retrieving"""
 
-    institute =  InstituteReadSerializer()
+    institute =  InstituteReadSlimSerializer()
 
     class Meta:
         model = User
@@ -65,8 +62,6 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             "last_name",
             "status",
             "institute",
-            "is_superuser",
-            "is_staff",
             "is_active",
         ]
 
