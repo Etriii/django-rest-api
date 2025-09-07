@@ -12,6 +12,8 @@ from api.serializers.ProgramSerializers import (
 )
 from api.utils.custom_paginations import CustomPagination
 
+from drf_spectacular.utils import extend_schema
+@extend_schema(tags=["Program"])
 
 class ProgramViewSet(viewsets.ModelViewSet):
     queryset = Program.objects.all().order_by("name")

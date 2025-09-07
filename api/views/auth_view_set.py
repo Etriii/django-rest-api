@@ -5,6 +5,9 @@ from api.serializers import AuthUserSerializer
 from api.utils.token_extractor import get_user_from_token
 
 
+from drf_spectacular.utils import extend_schema
+@extend_schema(tags=["AuthView"])
+
 class AuthViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = AuthUserSerializer

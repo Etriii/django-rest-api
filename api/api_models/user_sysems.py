@@ -2,7 +2,7 @@
 from django.db import models
 from api.core.BaseModel import BaseModel
 
-class UserSystems(BaseModel): 
+class UserSystem(BaseModel): 
     user = models.ForeignKey( 
         "User", on_delete=models.CASCADE, related_name="user_systems"
     )

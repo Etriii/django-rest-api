@@ -3,7 +3,7 @@ from .institute import Institute
 from .program import Program
 from .user import User
 from .system import System
-from .user_sysems import UserSystems
+from .user_sysems import UserSystem
 from .student import Student
 from .collection_category import CollectionCategory
 from .fee import Fee
@@ -19,7 +19,7 @@ __all__ = [
     "Program",
     "User",
     "System",
-    "UserSystems",
+    "UserSystem",
     "Student",
     "CollectionCategory",
     "Fee",

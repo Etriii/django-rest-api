@@ -48,6 +48,23 @@ class UserReadSerializer(serializers.ModelSerializer):
             "updated_at",
             "updated_by",
         ]
+        read_only_fields = fields
+        
+class UserReadSlimSerializer(serializers.ModelSerializer):
+    """Short schema for reading/retrieving"""
+
+    institute =  InstituteReadSlimSerializer()
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "institute",
+        ]
+        read_only_fields = fields
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):

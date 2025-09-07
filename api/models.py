@@ -10,7 +10,7 @@ from api.api_models import (
     Program,
     System,
     User,
-    UserSystems,
+    UserSystem,
     Student,
     CollectionCategory,
     Fee,

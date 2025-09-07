@@ -12,6 +12,8 @@ from api.serializers.InstituteSerializers import (
 )
 from api.utils.custom_paginations import CustomPagination
 
+from drf_spectacular.utils import extend_schema
+@extend_schema(tags=["Institute"])
 
 class InstituteViewSet(viewsets.ModelViewSet):
     queryset = Institute.objects.all().order_by("institute_name")

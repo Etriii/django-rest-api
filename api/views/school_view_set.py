@@ -8,6 +8,9 @@ from api.serializers.SchoolSerializers import SchoolCreateSerializer,SchoolReadS
 from api.utils.custom_paginations import CustomPagination
 
 
+from drf_spectacular.utils import extend_schema
+@extend_schema(tags=["School"])
+
 class SchoolViewSet(viewsets.ModelViewSet):
     queryset = School.objects.all().order_by("school_name")
     pagination_class = CustomPagination # list actions use this

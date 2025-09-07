@@ -213,7 +213,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='UserSystems',
+            name='UserSystem',
             fields=[
                 ('id', models.BigAutoField(primary_key=True, serialize=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),

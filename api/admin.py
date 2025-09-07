@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
-from .models import User, School, System, Institute, Program, Student, CollectionCategory, Fee, AttendanceEvent, AttendanceRecord, EventSetting, Payment, PaymentSubmission
+from .models import User, School, System, UserSystem, Institute, Program, Student, CollectionCategory, Fee, AttendanceEvent, AttendanceRecord, EventSetting, Payment, PaymentSubmission
 #GroupProfile
 
 # Custom User admin
@@ -36,6 +36,7 @@ class UserAdmin(UserAdmin):
 
 admin.site.register(School)
 admin.site.register(System)
+admin.site.register(UserSystem)
 admin.site.register(Institute)
 admin.site.register(Program)
 admin.site.register(Student)

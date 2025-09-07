@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "api",
     "rest_framework",  # DRF
-    "drf_spectacular", # OpenAPI schema + Swagger/Redoc
+    "drf_spectacular",  # OpenAPI schema + Swagger/Redoc
 ]
 
 MIDDLEWARE = [
@@ -89,7 +89,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql", 
+        "ENGINE": "django.db.backends.mysql",
         "NAME": os.getenv("DB_NAME"),
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
@@ -146,7 +146,7 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    #for throttling :>
+    # for throttling :>
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.UserRateThrottle",
         "rest_framework.throttling.AnonRateThrottle",
@@ -156,16 +156,14 @@ REST_FRAMEWORK = {
         "user": "100/hour",
         "anon": "10/min",
     },
-    #for responses
-    "DEFAULT_RENDERER_CLASSES": (
-        "api.utils.renderer.CustomResponseRenderer",
-    ),
+    # for responses
+    "DEFAULT_RENDERER_CLASSES": ("api.utils.renderer.CustomResponseRenderer",),
 }
 from datetime import timedelta
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),  
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ALGORITHM": "HS256",
     "SIGNING_KEY": os.getenv("JWT_SIGNING_KEY"),
 }
@@ -192,5 +190,14 @@ SPECTACULAR_SETTINGS = {
     #     "api.Payment.status": "PaymentStatusEnum",
     #     "api.PaymentSubmission.status": "PaymentSubmissionStatusEnum",
     #     "api.Program.status": "ProgramStatusEnum",
-    # }
+    # },
+    # "TAGS": [
+    #     {"name": "Auth", "description": "Authentication & JWT login"},
+    #     {"name": "Users", "description": "User management"},
+    #     {"name": "Institutes", "description": "Institute management"},
+    #     {"name": "Programs", "description": "Program management"},
+    #     {"name": "Schools", "description": "School management"},
+    #     {"name": "Systems", "description": "System management"},
+    #     {"name": "UserSystems", "description": "Link between users and systems"},
+    # ],
 }
