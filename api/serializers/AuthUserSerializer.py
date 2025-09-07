@@ -6,3 +6,5 @@ class AuthUserSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     exp = serializers.IntegerField()
     groups = serializers.ListField(child=serializers.CharField())
+    institute = serializers.CharField(source="institute.institute_name", read_only=True)
+

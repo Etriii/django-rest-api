@@ -13,7 +13,7 @@ class AuthViewSet(viewsets.ViewSet):
     serializer_class = AuthUserSerializer
 
     def list(self, request):
-        user, exp, groups = get_user_from_token(request)  # , groups, permissions
+        user, exp, groups, institute, school, systems = get_user_from_token(request)  # , groups, permissions
 
         if not user:
             return Response({"error": "Invalid or missing token"}, status=401)
@@ -24,6 +24,9 @@ class AuthViewSet(viewsets.ViewSet):
             "id": user.id,
             "exp": exp,
             "groups": groups,
+            "institute": institute,
+            "school": school,
+            "systems": systems,
             # "permissions": permissions
         }
 

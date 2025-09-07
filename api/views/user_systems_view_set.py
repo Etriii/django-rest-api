@@ -11,8 +11,9 @@ from api.serializers.UserSystemSerializers import (
 from api.utils.custom_paginations import CustomPagination
 
 from drf_spectacular.utils import extend_schema
-@extend_schema(tags=["User System"])
 
+
+@extend_schema(tags=["User System"])
 class UserSystemViewSet(viewsets.ModelViewSet):
     queryset = UserSystem.objects.all().order_by("id")
     pagination_class = CustomPagination  # list actions use this
@@ -23,6 +24,7 @@ class UserSystemViewSet(viewsets.ModelViewSet):
             return UserSystemCreateSerializer
         elif self.action == "retrieve":
             return UserSystemReadSerializer
+
         elif self.action in ["update", "partial_update"]:
             return UserSysemUpdateSerializer
         elif self.action == "destroy":
