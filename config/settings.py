@@ -155,7 +155,11 @@ REST_FRAMEWORK = {
         # naa puy built in sa throttler nga folder
         "user": "100/hour",
         "anon": "10/min",
-    }
+    },
+    #for responses
+    "DEFAULT_RENDERER_CLASSES": (
+        "api.utils.renderer.CustomResponseRenderer",
+    ),
 }
 from datetime import timedelta
 
@@ -180,14 +184,13 @@ SPECTACULAR_SETTINGS = {
     "LICENSE": {
         "name": "MIT",
     },
-    "ENUM_NAME_OVERRIDES": {
-        "api.models.User.status": "UserStatusEnum",
-        "api.models.Institute.status": "InstituteStatusEnum",
-        "api.models.Fee.status": "FeeStatusEnum",
-        "api.models.Payment.status": "PaymentStatusEnum",
-        "api.models.PaymentSubmission.status": "PaymentSubmissionStatusEnum",
-        "api.models.Program.status": "ProgramStatusEnum",
-    }
+    # still cannot import them :< dont mind the errors in terminal when accessing docs
+    # "ENUM_NAME_OVERRIDES": {
+    #     "api.User.status": "UserStatusEnum",
+    #     "api.Institute.status": "InstituteStatusEnum",
+    #     "api.Fee.status": "FeeStatusEnum",
+    #     "api.Payment.status": "PaymentStatusEnum",
+    #     "api.PaymentSubmission.status": "PaymentSubmissionStatusEnum",
+    #     "api.Program.status": "ProgramStatusEnum",
+    # }
 }
-
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3Mjc3NzMwLCJpYXQiOjE3NTcxOTEzMzIsImp0aSI6ImIwZjM2ODg5OGI5MzQ5MGM4MGZmNGYxZjc5NWQ5YjVhIiwidXNlcl9pZCI6IjEiLCJncm91cHMiOlsiU3VwZXIgQWRtaW4iXX0.D0Y3UXg0dSwoV1R9wBCY7ec9r_7lSeRpiuVgytQkF-I"
