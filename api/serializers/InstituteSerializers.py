@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from api.models import Institute
-from api.serializers.SchoolSerializers import SchoolReadSerializer
+from api.serializers.SchoolSerializers import SchoolReadSlimSerializer
 
 
 class InstituteCreateSerializer(serializers.ModelSerializer):
@@ -13,6 +13,8 @@ class InstituteCreateSerializer(serializers.ModelSerializer):
 
 class InstituteReadSerializer(serializers.ModelSerializer):
     """Detailed schema for reading/retrieving"""
+    
+    school = SchoolReadSlimSerializer()
     
     class Meta:
         model = Institute

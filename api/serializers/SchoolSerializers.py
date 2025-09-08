@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from api.models import School
 
+
 class SchoolCreateSerializer(serializers.ModelSerializer):
     """Schema for creating a school"""
 
@@ -22,6 +23,17 @@ class SchoolReadSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
             "updated_by",
+        ]
+
+
+class SchoolReadSlimSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = School
+        fields = [
+            "id",
+            "school_name",
+            "logo",
+            "location"
         ]
 
 

@@ -12,7 +12,7 @@ class User(AbstractUser, BaseModel):
     status = models.CharField(
         max_length=20, choices=UserStatus.choices, default=UserStatus.ACTIVE
     )
-    institute = models.ForeignKey(  # ✅ Proper FK instead of CharField
+    institute = models.ForeignKey(  
         "Institute",
         on_delete=models.SET_NULL,
         null=True,

@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from api.models import Program
-from api.serializers.InstituteSerializers import InstituteReadSerializer
+from api.serializers.InstituteSerializers import (
+    InstituteReadSerializer,
+    InstituteReadSlimSerializer,
+)
 
 
 class ProgramCreateSerializer(serializers.ModelSerializer):
@@ -27,6 +30,16 @@ class ProgramReadSerializer(serializers.ModelSerializer):
             "updated_at",
             "updated_by",
         ]
+
+
+class ProgramSlimReadSerializer(serializers.ModelSerializer):
+    institute = InstituteReadSlimSerializer(read_only=True)
+
+    class Meta:
+        model = Program
+        fields = ["name", "status", "institute"]
+
+        read_only_fields = fields
 
 
 class ProgramUpdateSerializer(serializers.ModelSerializer):

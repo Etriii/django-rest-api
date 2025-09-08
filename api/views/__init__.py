@@ -5,6 +5,7 @@ from .school_view_set import SchoolViewSet
 from .user_view_set import UserViewSet
 from .system_view_set import SystemViewSet
 from .user_systems_view_set import UserSystemViewSet
+from .student_view_set import StudentViewSet
 
 __all__  = [
     "AuthViewSet",
@@ -13,5 +14,6 @@ __all__  = [
     "SchoolViewSet",
     "UserViewSet",
     "SystemViewSet",
-    "UserSystemViewSet"
+    "UserSystemViewSet",
+    "StudentViewSet"
 ]
