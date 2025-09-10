@@ -6,6 +6,7 @@ from .user_view_set import UserViewSet
 from .system_view_set import SystemViewSet
 from .user_systems_view_set import UserSystemViewSet
 from .student_view_set import StudentViewSet
+from .collection_category_view_set import CollectionCategoryViewSet
 
 __all__  = [
     "AuthViewSet",
@@ -15,5 +16,6 @@ __all__  = [
     "UserViewSet",
     "SystemViewSet",
     "UserSystemViewSet",
-    "StudentViewSet"
+    "StudentViewSet",
+    "CollectionCategoryViewSet",
 ]

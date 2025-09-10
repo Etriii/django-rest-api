@@ -37,7 +37,7 @@ class ProgramSlimReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Program
-        fields = ["name", "status", "institute"]
+        fields = ["id", "name", "status", "institute"]
 
         read_only_fields = fields
 

@@ -21,6 +21,6 @@ class SystemSerializer(serializers.ModelSerializer):
 class SystemReadSlimSerializer(serializers.ModelSerializer):
     class Meta:
         model = System
-        fields = ["name"]
+        fields = ["id","name"]
 
         read_only_fields = ["name"]
